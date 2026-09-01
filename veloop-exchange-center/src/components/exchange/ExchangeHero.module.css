@@ -1,0 +1,79 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-elevated));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+}
+
+.textBlock {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-gold-soft);
+  margin: 0 0 10px;
+}
+
+.description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+
+.illustration {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.iconCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconCircle[data-variant="gem"] {
+  background: rgba(155, 140, 224, 0.14);
+  color: var(--color-purple-muted);
+}
+
+.iconCircle[data-variant="ve"] {
+  background: rgba(212, 175, 55, 0.14);
+  color: var(--color-gold-soft);
+}
+
+.arrowIcon {
+  color: var(--text-muted);
+}
+
+@media (max-width: 700px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .illustration {
+    align-self: center;
+  }
+}
