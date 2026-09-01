@@ -1,0 +1,117 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.iconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(155, 140, 224, 0.14);
+  color: var(--color-purple-muted);
+  margin-bottom: 4px;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.description {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 6px;
+}
+
+.conversionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--bg-card-elevated);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin: 6px 0;
+}
+
+.conversionValue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.gemIcon {
+  color: var(--color-purple-muted);
+}
+
+.veIcon {
+  color: var(--color-gold-soft);
+}
+
+.arrowIcon {
+  color: var(--text-muted);
+}
+
+.convertBtn {
+  background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
+  color: var(--bg-app);
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.convertBtn:hover {
+  opacity: 0.9;
+}
+
+.insufficientBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.insufficientText {
+  font-size: 12px;
+  color: var(--color-warning);
+  margin: 0;
+}
+
+.earnMoreBtn {
+  background: var(--bg-card-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.earnMoreBtn:hover {
+  border-color: var(--color-gold-soft);
+}
