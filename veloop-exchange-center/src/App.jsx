@@ -4,7 +4,14 @@ import BalanceOverview from "./components/exchange/BalanceOverview";
 import ExchangeCard from "./components/exchange/ExchangeCard";
 import ExchangeModal from "./components/exchange/ExchangeModal";
 import ConversionSuccess from "./components/exchange/ConversionSuccess";
-import { exchangeBalances, exchangeOptions } from "./data/exchangeData";
+import HowExchangeWorks from "./components/exchange/HowExchangeWorks";
+import ExchangeRules from "./components/exchange/ExchangeRules";
+import {
+  exchangeBalances,
+  exchangeOptions,
+  howExchangeWorksSteps,
+  exchangeRules,
+} from "./data/exchangeData";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -26,7 +33,7 @@ function App() {
   const handleContinue = () => setCompletedOption(null);
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 32, display: "flex", flexDirection: "column", gap: 20 }}>
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 32, display: "flex", flexDirection: "column", gap: 24 }}>
       <ExchangeHero />
       <BalanceOverview balances={exchangeBalances} />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
@@ -39,6 +46,9 @@ function App() {
           />
         ))}
       </div>
+
+      <HowExchangeWorks steps={howExchangeWorksSteps} />
+      <ExchangeRules rules={exchangeRules} />
 
       {selectedOption && (
         <ExchangeModal
