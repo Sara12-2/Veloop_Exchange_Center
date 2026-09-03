@@ -1,0 +1,70 @@
+.wrap {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.iconRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gemIcon {
+  color: var(--color-purple-muted);
+  animation: floatPulse 1.6s ease-in-out infinite;
+}
+
+.veIcon {
+  color: var(--color-gold-soft);
+  animation: floatPulse 1.6s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(-4px); opacity: 1; }
+}
+
+.trackDots {
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); background: var(--color-gold-soft); }
+}
+
+.text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gemIcon,
+  .veIcon,
+  .dot {
+    animation: none;
+  }
+}
