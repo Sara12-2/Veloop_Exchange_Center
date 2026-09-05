@@ -1,97 +1,192 @@
+/* src/components/exchange/BalanceOverview.module.css */
 .section {
+  padding: 0.5rem 0 1.5rem;
+  position: relative;
+}
+
+.balanceGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 1.25rem;
 }
 
 .card {
   position: relative;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  box-shadow: var(--shadow-card);
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: linear-gradient(145deg, rgba(22, 24, 39, 0.8), rgba(22, 24, 39, 0.4));
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  animation: cardSlideIn 0.5s ease-out forwards;
+}
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
 }
 
-.card[data-variant="gems"] {
-  border-color: rgba(155, 140, 224, 0.2);
-}
+.card[data-variant="gems"] { border-color: rgba(108, 140, 255, 0.1); }
+.card[data-variant="gems"]:hover { border-color: rgba(108, 140, 255, 0.2); }
+.card[data-variant="ves"] { border-color: rgba(212, 175, 55, 0.1); }
+.card[data-variant="ves"]:hover { border-color: rgba(212, 175, 55, 0.2); }
 
-.card[data-variant="ves"] {
-  border-color: rgba(212, 175, 55, 0.2);
+.cardGlow {
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0.1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
+.card:hover .cardGlow { opacity: 0.2; }
+.cardGlow[data-variant="gems"] { background: radial-gradient(circle, #6c8cff, transparent 70%); }
+.cardGlow[data-variant="ves"] { background: radial-gradient(circle, #d4af37, transparent 70%); }
 
 .header {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 1rem;
+}
+
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
 }
 
 .iconWrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
+.iconWrap[data-variant="gems"] { color: #6c8cff; border-color: rgba(108, 140, 255, 0.12); }
+.iconWrap[data-variant="ves"] { color: #d4af37; border-color: rgba(212, 175, 55, 0.12); }
 
-.card[data-variant="gems"] .iconWrap {
-  background: rgba(155, 140, 224, 0.14);
-  color: var(--color-purple-muted);
-}
-
-.card[data-variant="ves"] .iconWrap {
-  background: rgba(212, 175, 55, 0.14);
-  color: var(--color-gold-soft);
+.cardTitle {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .infoBtn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 10px;
-  margin: -10px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
-
-.infoBtn:hover {
-  color: var(--text-secondary);
-}
-
-.tooltip {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  width: 220px;
-  background: #0f1120;
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 12px;
-  color: var(--text-secondary);
-  box-shadow: var(--shadow-card);
-  z-index: 10;
-}
+.infoBtn:hover { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6); }
+.infoBtn[aria-expanded="true"] { background: rgba(108, 140, 255, 0.15); color: #6c8cff; }
 
 .value {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
   margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .label {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0.25rem 0 0;
+  font-weight: 500;
 }
 
-@media (max-width: 500px) {
-  .section {
-    grid-template-columns: 1fr;
-  }
+.subLabel {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.125rem;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  max-width: 280px;
+  padding: 1rem 1.25rem;
+  background: #1a1d2e;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  pointer-events: none;
+  animation: tooltipFade 0.2s ease-out;
+}
+
+.tooltipArrow {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #1a1d2e;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px 0 0 0;
+}
+
+.tooltipTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.375rem;
+}
+
+.tooltipDescription {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@keyframes cardSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tooltipFade {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .balanceGrid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .card { padding: 1rem 1rem 0.875rem; }
+  .value { font-size: 1.5rem; }
+  .iconWrap { width: 30px; height: 30px; }
+  .iconWrap svg { width: 16px; height: 16px; }
+  .cardTitle { font-size: 0.75rem; }
+  .tooltip { max-width: 240px; padding: 0.875rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  .balanceGrid { grid-template-columns: 1fr; gap: 0.75rem; }
+  .card { padding: 1rem 1.25rem 1rem; }
+  .value { font-size: 1.5rem; }
+  .tooltip { max-width: 200px; padding: 0.75rem 0.875rem; }
 }
