@@ -1,158 +1,376 @@
+/* ExchangeModal.module.css */
+
+/* ----- Overlay ----- */
 .overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(10, 11, 20, 0.7);
-  backdrop-filter: blur(3px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ----- Modal ----- */
 .modal {
+  background: linear-gradient(145deg, #1a1d2e, #161827);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-width: 420px;
   width: 100%;
-  max-width: 380px;
-  background: var(--bg-card-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-card-hover);
-  animation: modalIn 0.2s ease-out;
+  padding: 1.75rem 1.75rem 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s ease;
 }
 
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
+/* ----- Modal Glow ----- */
+.modalGlow {
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(108, 140, 255, 0.05), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ----- Header ----- */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 1.75rem;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.headerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.12);
+  color: #d4af37;
 }
 
 .title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
   margin: 0;
 }
 
 .closeBtn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 6px;
-  display: flex;
-  border-radius: 6px;
-}
-
-.closeBtn:hover:not(:disabled) {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.closeBtn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.conversionBlock {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  background: var(--bg-card);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  margin-bottom: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.conversionValue {
+.closeBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.closeBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ----- Conversion Block ----- */
+.conversionBlock {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.conversionItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.iconWrapper[data-type="gem"] {
+  color: #6c8cff;
+  border-color: rgba(108, 140, 255, 0.15);
+}
+
+.iconWrapper[data-type="ve"] {
+  color: #d4af37;
+  border-color: rgba(212, 175, 55, 0.15);
+}
+
+.conversionDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversionAmount {
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #ffffff;
+  line-height: 1.2;
 }
 
-.gemIcon {
-  color: var(--color-purple-muted);
+.conversionLabel {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.veIcon {
-  color: var(--color-gold-soft);
+.arrowWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.arrowLine {
+  width: 1px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .arrowIcon {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
+/* ----- Balance Preview ----- */
 .balancePreview {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 22px;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 1.75rem;
 }
 
 .balanceRow {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 13px;
+  padding: 0.35rem 0;
 }
 
 .balanceLabel {
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .balanceValue {
-  color: var(--text-primary);
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
+.balanceGem {
+  color: #6c8cff;
+}
+
+.balanceVe {
+  color: #d4af37;
+}
+
+.balanceDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  margin: 0.25rem 0;
+}
+
+/* ----- Actions ----- */
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 0.75rem;
+}
+
+.cancelBtn,
+.confirmBtn {
+  flex: 1;
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .cancelBtn {
-  flex: 1;
-  background: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .cancelBtn:hover:not(:disabled) {
-  border-color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
 }
 
 .confirmBtn {
-  flex: 1;
-  background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
-  color: var(--bg-app);
+  background: linear-gradient(135deg, #6c8cff, #4a6fd9);
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(108, 140, 255, 0.25);
 }
 
 .confirmBtn:hover:not(:disabled) {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(108, 140, 255, 0.35);
+}
+
+.confirmBtn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .cancelBtn:disabled,
 .confirmBtn:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ----- Spinner ----- */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.25rem;
+    border-radius: 20px;
+    max-width: 100%;
+    margin: 0 0.5rem;
+  }
+
+  .conversionBlock {
+    flex-direction: column;
+    padding: 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .arrowWrapper {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .arrowLine {
+    width: 30px;
+    height: 1px;
+  }
+
+  .arrowIcon {
+    transform: rotate(90deg);
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .cancelBtn,
+  .confirmBtn {
+    padding: 0.75rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .conversionAmount {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal {
+    padding: 1rem;
+  }
+
+  .conversionItem {
+    gap: 0.5rem;
+  }
+
+  .iconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .iconWrapper svg {
+    width: 18px;
+    height: 18px;
+  }
 }
