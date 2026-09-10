@@ -126,7 +126,9 @@ export default function ExchangeCenter() {
     return (
       <div className={styles.page}>
         <div className={styles.errorState}>
-          <AlertTriangle size={32} className={styles.errorIcon} />
+          <div className={styles.errorIconWrapper}>
+            <AlertTriangle size={32} className={styles.errorIcon} />
+          </div>
           <h2 className={styles.errorTitle}>Unable to load exchange options</h2>
           <p className={styles.errorText}>Please try again</p>
           <button className={styles.retryBtn} onClick={handleRetry}>
@@ -151,7 +153,9 @@ export default function ExchangeCenter() {
 
           {!hasOptions ? (
             <div className={styles.emptyState}>
-              <PackageOpen size={28} className={styles.emptyIcon} />
+              <div className={styles.emptyIconWrapper}>
+                <PackageOpen size={28} className={styles.emptyIcon} />
+              </div>
               <p className={styles.emptyTitle}>No conversions available right now.</p>
               <p className={styles.emptyText}>
                 New reward conversion opportunities will appear here when available.
